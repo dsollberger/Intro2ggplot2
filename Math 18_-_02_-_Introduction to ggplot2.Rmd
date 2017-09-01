@@ -1,0 +1,136 @@
+---
+title: "Data Science"
+author: "Derek Sollberger"
+date: "August 29, 2017"
+output: 
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
+---
+
+## Welcome to Math 18
+
+Lecturer:  Derek Sollberger
+
+e-mail: dsollberger@ucmerced.edu
+
+office hours: 
+
+* F, 10 AM to 12 noon, SSM 209
+
+## The data
+
+```{r, message = FALSE, warning = FALSE}
+library("tidyr")
+library("ggplot2")
+library("mosaicData")
+```
+
+## Graphics in R
+
+1.  base graphics (simplest, but cumbersome)
+2.  lattice (usually for chemical studies)
+3.  ggplot (used my most data scientists)
+
+## One-Dimensional, Discrete Data
+
+```{r}
+data(Dimes)
+head(Dimes)
+```
+
+## One-Dimensional, Continuous Data
+
+```{r}
+data(Dimes)
+head(Dimes)
+```
+
+## Kernel Density Estimates
+
+```{r}
+data(SAT)
+head(SAT)
+```
+
+## Two, Continuous Variables
+
+```{r}
+data(SAT)
+head(SAT)
+```
+
+## Clicker Question
+
+Were you able to get RStudio running and R Markdown to knit?
+
+1.  Yes
+2.  RStudio yes, but not the markdown
+3.  No
+
+## Facet Grids
+
+```{r}
+data(SwimRecords)
+head(SwimRecords)
+```
+
+## Color Brewer
+
+```{r}
+data(SnowGR)
+head(SnowGR)
+```
+
+## Example:  Opiate Addiction?
+
+https://www.nytimes.com/interactive/2017/06/05/upshot/opioid-epidemic-drug-overdose-deaths-are-rising-faster-than-ever.html?mcubz=1&_r=0
+
+http://www.worldlifeexpectancy.com/usa-cause-of-death-by-age-and-gender
+
+## Choropleths
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+library(choroplethrCaCensusTract)
+data(df_ca_tract_demographics)
+df_ca_tract_demographics$value = df_ca_tract_demographics$median_rent
+ca_tract_choropleth(df_ca_tract_demographics,
+    title       = "2013 Merced County Census Tracts \n Median Income",
+    legend      = "Median Income",
+    num_colors  = 5,
+    county_zoom = 6047)
+```
+
+Source:  https://www.arilamstein.com/blog/2015/09/30/combining-choropleth-maps-and-reference-maps-in-r/
+
+## Choropleths
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+library(choroplethrCaCensusTract)
+data(df_ca_tract_demographics)
+df_ca_tract_demographics$value = df_ca_tract_demographics$median_rent
+ca_tract_choropleth(df_ca_tract_demographics,
+    title       = "2013 Merced County Census Tracts \n Median Income",
+    legend      = "Median Income",
+    num_colors  = 5,
+    county_zoom = 6047,
+    reference   = TRUE)
+```
+
+## Example:  Cholera Outbreak of 1854
+
+<img src = "cholera.jpg">
+
+## Example:  Cholera Outbreak of 1854
+
+<img src = "cholera.jpg">
+
+Map created by Dr. John Snow
+
+## Looking Ahead
+
+* "Introduction" due Thursday, August 31
+* Think about groups
+
+    * who do you want to work with?
+    * up to 4 students per group

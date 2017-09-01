@@ -1,0 +1,110 @@
+---
+title: "02_-_Introduction to ggplot2"
+author: "Derek Sollberger"
+date: "August 29, 2017"
+output: html_document
+---
+
+```{r}
+library("tidyr")
+library("mosaicData")
+library("ggplot2")
+```
+
+## One-Dimensional, discrete data
+
+```{r}
+ggplot(Dimes, aes(x = year)) +
+  geom_dotplot() +
+  ggtitle("Dimes by Year") +
+  ylab("proportion")
+```
+
+## One-Dimensional, continuous data
+
+```{r}
+ggplot(Dimes, aes(x = mass)) +
+  geom_histogram() +
+  ggtitle("Dimes")
+```
+
+## Two, continuous variables
+
+```{r}
+data(SAT)
+head(SAT)
+
+#scatterplot
+ggplot(SAT, aes(x = expend, y = sat)) +
+  geom_point() +
+  geom_text(aes(label = state), vjust = 2) +
+  ggtitle("SAT scores by State")
+```
+
+## Estimating a Continuous Distribution
+
+```{r}
+#kernel density estimate
+ggplot(SAT, aes(x = sat)) +
+  geom_density(kernel = "gaussian")
+```
+
+```{r}
+SAT %>%
+  gather(key = testType, value = test, verbal, math) %>%
+  ggplot(aes(x = test, color = testType)) +
+  geom_density(kernel = "gaussian")
+```
+
+fill in a shape
+
+```{r}
+SAT %>%
+  gather(key = testType, value = test, verbal, math) %>%
+  ggplot(aes(x = test, color = testType, fill = testType)) +
+  geom_density(kernel = "gaussian")
+```
+
+alpha controls the shading (opacity)
+
+```{r}
+SAT %>%
+  gather(key = testType, value = test, verbal, math) %>%
+  ggplot(aes(x = test, color = testType, fill = testType) +
+  geom_density(kernel = "gaussian", alpha = 0.5))
+```
+
+## Facet Grids
+
+```{r}
+data("SwimRecords")
+ggplot(SwimRecords, aes(x = year, y = time)) +
+  geom_line() +
+  facet_grid(. ~ sex)
+```
+
+## Color Brewer
+
+```{r}
+data("SnowGR")
+ggplot(SnowGR, aes(x = Total)) +
+  geom_histogram(binwidth = 5)
+```
+
+```{r}
+ggplot(SnowGR, aes(x = Total, fill = ..x..)) +
+  geom_histogram(binwidth = 5)
+  scale_fill_gradient(low = "yellow", high = "blue")
+```
+
+## Example:  Opiate Addiction?
+
+```{r}
+causes <- c("Poisoning", "Traffic Accidents", "Suicide", "Breast Cancer", "Heart Disease")
+deaths <- c(6803, 4979, 4159, 2325, 1612)
+df <- data.frame(causes, deaths)
+ggplot(df, aes(x = causes, y = deaths)) +
+  geom_bar(aes(fill = causes), stat = "identity")
+
+
+```
